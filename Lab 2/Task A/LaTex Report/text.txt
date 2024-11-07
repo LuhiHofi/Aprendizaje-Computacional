@@ -1,0 +1,300 @@
+\section{Introduction to problem}
+Classification is a key task in machine learning: when we train such a model, the training set includes data points and their known class. It is important to see how these models perform in a practical scenario. This is the analysis of various classification methods (A, B, C, D and E). We will compare their performance with the help of well-established metrics like Precision (PR), Recall (RC), Specificity (SP), False Negative Rate (FNR), and False Positive Rate (FPR). We will use them to compare against existing methods using Accuracy (ACC), Spatial Accuracy (S), F-measure (Fm). By analyzing these metrics, we would try to find the best suitable method for that particular classification. 
+
+\section{Dataset}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{data.png}
+  \caption{Provided dataset from the pdf file}
+  \label{fig:data}
+\end{figure}
+
+\begin{itemize}
+  \item \textbf{Number of Samples:} 1000
+  \item \textbf{Number of Classes:} 2 (Positive and Negative)
+  \item \textbf{Number of Samples:}
+  \begin{itemize}
+    \item Positive Class: 100
+    \item Negative Class: 900
+  \end{itemize}
+\end{itemize}
+It is worth noting that for all methods we get the same number of positive and negative results, otherwise that wouldn't be the same dataset. \\
+With only 10\% of the dataset being actual positives, we can easily say that the dataset is imbalanced.
+
+\section{Metrics}
+As previously noted, we will be using in our project 8 different metrics.
+\subsection{Precision (PR)}
+\begin{itemize}
+    \item \textbf{Represents:} The accuracy of positive predictions.
+    \item \textbf{Definition:} Precision is the ratio of true positives to the sum of true positives and false positives.
+    \item \textbf{Formula:} PR = TP / (TP + FP)
+    \item \textbf{Range:} [0, 1]
+    \item \textbf{Interpretation:} Higher values are better, as they indicate fewer false positives among predicted positives.
+\end{itemize}
+
+\subsection{Recall (Sensitivity or True Positive Rate) (RC)}
+\begin{itemize}
+    \item \textbf{Represents:} The ability to capture all actual positives.
+    \item \textbf{Definition:} Recall is the ratio of true positives to the sum of true positives and false negatives.
+    \item \textbf{Formula:} RC = TP / (TP + FN)
+    \item \textbf{Range:} [0, 1]
+    \item \textbf{Interpretation:} Higher values are better, as they indicate that the method is identifying most true positives.
+\end{itemize}
+
+\subsection{Specificity (True Negative Rate) (SP)}
+\begin{itemize}
+    \item \textbf{Represents:} The ability to correctly identify negatives.
+    \item \textbf{Definition:} Specificity is the ratio of true negatives to the sum of true negatives and false positives.
+    \item \textbf{Formula:} SP = TN / (TN + FP)
+    \item \textbf{Range:} [0, 1]
+    \item \textbf{Interpretation:} Higher values are better, as they indicate that the method accurately identifies negatives with few false positives.
+\end{itemize}
+
+\subsection{False Negative Rate (FNR)}
+\begin{itemize}
+    \item \textbf{Represents:} The proportion of actual positives missed by the method.
+    \item \textbf{Definition:} FNR is the ratio of false negatives to the sum of true positives and false negatives.
+    \item \textbf{Formula:} FNR = FN / (TP + FN)
+    \item \textbf{Range:} [0, 1]
+    \item \textbf{Interpretation:} Lower values are better, as they indicate fewer missed positives.
+\end{itemize}
+
+\subsection{False Positive Rate (FPR)}
+\begin{itemize}
+    \item \textbf{Represents:} The proportion of actual negatives incorrectly identified as positives.
+    \item \textbf{Definition:} FPR is the ratio of false positives to the sum of false positives and true negatives.
+    \item \textbf{Formula:} FPR = FP / (FP + TN)
+    \item \textbf{Range:} [0, 1]
+    \item \textbf{Interpretation:} Lower values are better, as they indicate fewer false positives.
+\end{itemize}
+
+\subsection{Accuracy (ACC)}
+\begin{itemize}
+    \item \textbf{Represents:} The overall correctness of predictions.
+    \item \textbf{Definition:} Accuracy is the ratio of correctly predicted instances (true positives and true negatives) to the total number of instances.
+    \item \textbf{Formula:} ACC = (TN + TP) / (TP + FN + FP + TN)
+    \item \textbf{Range:} [0, 1]
+    \item \textbf{Interpretation:} Higher values are better, indicating a higher overall correctness.
+\end{itemize}
+
+\subsection{Spatial Accuracy (Jaccard Index) (S)}
+\begin{itemize}
+    \item \textbf{Represents:} The effectiveness of positive identification relative to all positive and false detections.
+    \item \textbf{Definition:} Spatial Accuracy (S) measures the ratio of true positives to the sum of true positives, false negatives, and false positives, offering a focused accuracy measure for identifying positives.
+    \item \textbf{Formula:} S = TP / (TP + FN + FP)
+    \item \textbf{Range:} [0, 1]
+    \item \textbf{Interpretation:} Higher values are better, as they indicate a stronger positive detection performance with minimal false positives and negatives.
+\end{itemize}
+
+\subsection{F-measure (F1 Score) (Fm)}
+\begin{itemize}
+    \item \textbf{Represents:} The harmonic mean of precision and recall, balancing both metrics.
+    \item \textbf{Definition:} F-measure combines precision and recall to give a single measure of a method's effectiveness.
+    \item \textbf{Formula:} Fm = (2 * PR * RC) / (PR + RC)
+    \item \textbf{Range:} [0, 1]
+    \item \textbf{Interpretation:} Higher values are better, as they indicate a balanced approach between identifying positives and avoiding false positives.
+\end{itemize}
+
+\newpage
+\section{Yielded performance}
+\begin{table}[ht]
+\centering
+\begin{tabular}{ccccccccc}
+\toprule
+Method & Precision & Recall & Specificity & FNR & FPR & Accuracy & Spatial Accuracy & F-measure \\
+\midrule
+A & 0.10 & \bfseries 1.00 & 0.00 & 0.00 & \bfseries 1.00 & \bfseries 0.10 & 0.10 & 0.18 \\
+B & 0.39 & \bfseries 0.80 & 0.86 & 0.20 & 0.14 & 0.86 & 0.36 & \bfseries 0.52 \\
+C & \bfseries 0.50 & 0.25 & 0.97 & 0.75 & \bfseries 0.03 & 0.90 & 0.20 & 0.33 \\
+D & \bfseries 0.50 & 0.50 & 0.94 & 0.50 & 0.06 & 0.90 & 0.33 & \bfseries 0.50 \\
+E & \bfseries 0.00 & \bfseries 0.00 & 1.00 & \bfseries 1.00 & 0.00 & 0.90 & 0.00 & \bfseries 0.00 \\
+\bottomrule 
+\end{tabular}
+\caption{Performance Metrics for Different Methods}
+\end{table}
+
+\section{Analysis of each method}
+\subsection{Method A}
+\begin{itemize}
+    \item Precision: \textbf{0.10} - Very low, meaning many predicted positives are false.
+    \item Recall: \textbf{1.00} - Excellent at identifying actual positives, with no false negatives.
+    \item Specificity: \textbf{0.00} - Poor, unable to identify true negatives.
+    \item False Negative Rate: \textbf{0.00} - No missed positives.
+    \item False Positive Rate: \textbf{1.00} - High, with many false positives.
+    \item Accuracy: \textbf{0.10} - Very low due to the inability to identify true negatives.
+    \item Spatial accuracy: \textbf{0.10} - Low, indicating poor overall positive identification accuracy.
+    \item F-measure: \textbf{0.18} - Poor balance between precision and recall due to low precision.
+    \item \textbf{Summary:} Method A is completely useless as it predicts every item as positive.
+\end{itemize}
+
+\subsection{Method B}
+\begin{itemize}
+    \item Precision: \textbf{0.39} - Moderate, with a decent balance between true positives and false positives.
+    \item Recall: \textbf{0.80} - High, identifying most positives.
+    \item Specificity: \textbf{0.86} - High, with effective negative identification.
+    \item False Negative Rate: \textbf{0.20} - Low, missing only a small proportion of positives.
+    \item False Positive Rate: \textbf{0.14} - Acceptable, with relatively few false positives.
+    \item Accuracy: \textbf{0.86} - High, due to a balanced identification of positives and negatives.
+    \item Spatial accuracy: \textbf{0.36} - Moderate, showing method B reasonably covers positives and still does not overguess.
+    \item F-measure: \textbf{0.52} - Highest among all methods, reflecting a strong balance.
+    \item \textbf{Summary:} Method B performs well overall, striking a strong balance across metrics and making it the best choice.
+\end{itemize}
+
+\subsection{Method C}
+\begin{itemize}
+    \item Precision: \textbf{0.50} - High, with few false positives.
+    \item Recall: \textbf{0.25} - Low, missing many positives.
+    \item Specificity: \textbf{0.97} - Very high, with nearly all negatives identified correctly.
+    \item False Negative Rate: \textbf{0.75} - Poor, missing most positives.
+    \item False Positive Rate: \textbf{0.03} - Very low, with minimal false positives.
+    \item Accuracy: \textbf{0.90} - High, mainly due to excellent specificity.
+    \item Spatial accuracy: \textbf{0.20} - Lower due to too many false negatives.
+    \item F-measure: \textbf{0.33} - Low, as method C has low recall.
+    \item \textbf{Summary:} Method C is excellent at identifying negatives but poor at identifying positives, making it highly specific but largely ineffective for identifying actual positives.
+\end{itemize}
+
+\subsection{Method D}
+\begin{itemize}
+    \item Precision: \textbf{0.50} - The highest precision, meaning fewer false positives.
+    \item Recall: \textbf{0.50} - Moderate, catching half of the positives.
+    \item Specificity: \textbf{0.94} - High, accurately identifying negatives.
+    \item False Negative Rate: \textbf{0.50} - Average, missing half of positives.
+    \item False Positive Rate: \textbf{0.06} - Low, with few false positives.
+    \item Accuracy: \textbf{0.90} - High, due to good specificity and reasonable recall.
+    \item Spatial accuracy: \textbf{0.33} - Moderate, due to the number of correctly guessed positives is the same as the number of false positives and the number of false negatives
+    \item F-measure: \textbf{0.50} - Balanced, though slightly lower than Method B.
+    \item \textbf{Summary:} Method D has the best precision and high specificity, making it effective but somewhat limited due to a moderate recall.
+\end{itemize}
+
+\subsection{Method E}
+\begin{itemize}
+    \item Precision: \textbf{0.00} - Fails completely to make accurate positive predictions.
+    \item Recall: \textbf{0.00} - Identifies no positives at all.
+    \item Specificity: \textbf{1.00} - Perfect, identifying all negatives correctly.
+    \item False Negative Rate: \textbf{1.00} - Misses all positives.
+    \item False Positive Rate: \textbf{0.00} - No false positives, but no true positives either.
+    \item Accuracy: \textbf{0.90} - High but misleading, only due to perfect negative predictions.
+    \item Spatial accuracy: \textbf{0.00} - Zero as the method doesn't predict any positives
+    \item F-measure: \textbf{0.00} - Fails to balance any meaningful prediction of positives.
+    \item \textbf{Summary:} Method E is completely useless as it fails to identify any positive instances.
+\end{itemize}
+
+\section {Analysis of the performance}
+\subsection{Precision (PR)}
+\begin{itemize}
+    \item \textbf{Best:} Methods C and D (0.5) \\
+    These methods have the highest precision, meaning they have the highest percentage of predicted positives being truly positive.
+    
+    \item \textbf{Worst:} Method E (0.0) \\
+    Method E does not predict any positives.
+\end{itemize}
+
+\subsection{Recall (RC)}
+\begin{itemize}
+    \item \textbf{Best:} Method A (1.0) \\
+    Method A has the highest recall, identifying all actual positives.
+    
+    \item \textbf{Worst:} Method E (0.0) \\
+    Method E does not predict any positives.
+\end{itemize}
+
+\subsection{Specificity (SP)}
+\begin{itemize}
+    \item \textbf{Best:} Method E (1.0) \\
+    Method E has perfect specificity, identifying all actual negatives.
+    
+    \item \textbf{Worst:} Method A (0.0) \\
+    Method A does not predict any negatives.
+\end{itemize}
+
+\subsection{False Negative Rate (FNR)}
+\begin{itemize}
+    \item \textbf{Best:} Method A (0.0) \\
+    Method A captures all actual positives, achieving a perfect false negative rate.
+    
+    \item \textbf{Worst:} Method E (1.0) \\
+    Method E misses all actual positives, achieving the worst possible false negative rate.
+\end{itemize}
+
+\subsection{False Positive Rate (FPR)}
+\begin{itemize}
+    \item \textbf{Best:} Method E (0.0) \\
+    Method E captures all actual negatives, achieving a perfect false positive rate.
+    
+    \item \textbf{Worst:} Method A (1.0) \\
+    Method A misses all actual negatives, achieving the worst possible false positive rate.
+\end{itemize}
+
+\subsection{Accuracy (ACC)}
+\begin{itemize}
+    \item \textbf{Best:} Methods C, D, and E (0.9) \\
+    These methods achieve the highest accuracy, mainly due to strong specificity.
+    
+    \item \textbf{Worst:} Method A (0.1) \\
+    Method A has the lowest accuracy, as only 10\% of the test data are actual positives.
+\end{itemize}
+
+\subsection{Spatial Accuracy (S)}
+\begin{itemize}
+    \item \textbf{Best:} Method B (0.356) \\
+    Method B has the highest spatial accuracy, effectively balancing the identification of positives and negatives.
+    
+    \item \textbf{Worst:} Method E (0.0) \\
+    Method E has no spatial accuracy, failing to predict any positives.
+\end{itemize}
+
+\subsection{F-measure (Fm)}
+\begin{itemize}
+    \item \textbf{Best:} Method B (0.525) \\
+    Method B provides the best balance between precision and recall, making it effective at identifying positives with fewer false positives.
+    
+    \item \textbf{Worst:} Method E (0.0) \\
+    With no true positives predicted, Method E fails to achieve any meaningful balance.
+\end{itemize}
+
+\section {Graphs}
+\subsection {FN against FP}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{fnfp.png}
+  \caption{Figure FN against FP}
+  \label{fig:data}
+\end{figure}
+\begin{itemize}
+    \item \textbf{Best Method :} \\
+    
+    \item \textbf{Worst Method :} \\
+    
+\end{itemize}
+
+\subsection {PR against RC}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{prrc.png}
+  \caption{Figure PR against RC}
+  \label{fig:data}
+\end{figure}
+\begin{itemize}
+    \item \textbf{Best Method :} \\
+    
+    \item \textbf{Worst Method :} \\
+    
+\end{itemize}
+
+\subsection {ACC against Fm}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{accfm.png}
+  \caption{Figure ACC against Fm}
+  \label{fig:data}
+\end{figure}
+\begin{itemize}
+    \item \textbf{Best Method :} \\
+    
+    \item \textbf{Worst Method :} \\
+    
+\end{itemize}
+
+\section {Conclusion}
+Method B stands out as the overall best performer, effectively balancing various metrics. It boasts the highest F-measure (0.52), indicating a strong compromise between precision (0.39) and recall (0.8). Additionally, it achieves a respectable accuracy of 0.85. This balanced performance makes Method B a solid choice, capable of accurately identifying positives while minimizing false positives. \\
+However, the optimal method ultimately hinges on specific objectives. If absolute certainty in positive predictions is paramount, even at the cost of missing some true positives, Method C might be a more suitable option.
