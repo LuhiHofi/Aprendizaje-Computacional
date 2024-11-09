@@ -1,0 +1,66 @@
+\section{Question 1}
+\textbf{When developing a supervised method, why do we need to split
+the dataset into training and test sets?} \\
+In supervised machine learning, we split data into training and test set in order to assess generalization ability of a model: if the model can perform only on this particular training set or also on some new unseen data. The training set is for the model to learn and the test set which it never has seen is used for validation. It prevents the model from memorizing specific patterns rather than learning general trends, which makes them perform poorly in new data when it performs well on trainning data : overfitting. It's essential to understand how the model actually performs in the real world and so this validation step is critical.
+
+\section{Question 2}
+\textbf{What is cross-validation?} \\
+Cross-validation is a process in machine learning used to measure how well a model generalizes to new, unseen data. It involves splitting the data into several subsets, or "folds," in order to iteratively train on and test against the folds. Probably the most common form is k-fold cross-validation, where the dataset is divided into k parts. The model is trained on k-1 of these parts and tested on the remaining part. This is repeated k times so that every subset acts once as a test set. \\
+This approach gives a more reliable evaluation than a single train-test split, reducing overfitting and enabling the understanding of model performance on different subsets of data.
+
+\section{Question 3}
+\textbf{What is artificial neural networks?} \\
+An artificial neural network (ANN) is a computing system inspired by the neural networks of the human brain. These networks consist of interconnected layers of nodes, or "neurons," which process information and learn to recognize patterns by being exposed to data. An ANN is structured as follows: there is one input layer, one or more hidden layers, and one output layer. Each neuron receives some inputs, processes them through weights and activation functions, and sends the result to the next layer. \\
+ANNs are extremely flexible and have applications in image recognition, natural language processing, and predictive analytics. During training, they modify weights in order to decrease prediction errors learned from the data, resulting in a growth in accuracy the more data it consumes during the training of the model.
+
+\section{Question 4}
+\textbf{What is Deep Learning (DL)?} \\
+As a branch of machine learning, deep learning investigates the use of artificial neural networks with many layers to analyze data and instinctively learn ultra-complex patterns and intelligence. Whereas traditional machine learning often relies on the manual extraction of features, developing a good pattern match from specific raw samples, and requiring many feature engineering efforts, deep learning techniques are automatically capable of discovering ideal representations for data, thus becoming extremely effective for sophisticated tasks, like recognizing images, interpreting natural languages, and steering self-driving cars. They learn those features from data and predict via a deep network with multiple layers. \\
+Deep learning's makeup is strongly inspired by the human brain, and in it, the performance achieves by utilizing large amounts of data and coupled with extreme computational power reapveniences fantastic outcomes, especially in applications requiring an understanding of intricate data structures. 
+
+\newpage
+\section{Question 5}
+\textbf{What is new in DL models with respect to traditional feedforward neural networks?} \\
+Neural networks, especially deep learning (DL) models, are a clear improvement over earlier feedforward neural network models. Both classes rely on neuron levels; however, DL models have preferred to appear with increased neuron levels (deep architectures) that could learn far more complicated data representations. In contrast, traditional feedforward networks tended to experiment with simple linear-inherent structures with different wounds: theirs extending from input to hidden and to output layers. Some of these applications include convolutional networks and recurrent neural networks, which are stated to classify unstructured and static data, such as images or texts as tenses, while avoiding manual feature engineering. \\ 
+This consequently allows them to perform better in image classification, natural language processing, and speech recognition tasks, where the complexity of patterns increases and hierarchical learning is thorough. With natural accelerators, these networks would thus be able to scale better with large datasets and make the best use of huge computational resources, which makes them highly sought after for applications such as autonomous cars and even medical diagnostics. 
+
+\section{Question 6}
+\textbf{What is overfitting and how DL models avoid it?} \\
+Overfitting occurs when a model learns too much about the details and noise in the training data, negatively impacting performance on new, unseen data. The model becomes too complex and not only learns the underlying patterns but also the random fluctuations or noise within the training dataset. As a result, while the model looks great on training data, its predictive power on new data is poor. Overfitting can be dealt with in several ways: \\
+\textit{Early Stopping}: This technique consists of closing a learning phase when the performance of the model on the validation dataset no longer improves. A really nice way of stopping overfitting is to monitor the validation error during training and stop training before the model starts memorizing the training data. \\
+\textit{Regularization}: A regularization method used in L1 or L2 is to penalize the model with big weights, which reduces complexity and therefore reduces overfitting. L1 Regularization leads to sparse models (where many weights are zero) while L2 reduces the weights but leaves them small in absolute value. \\
+\textit{Dropout}: Dropout randomly deactivates a fraction of neurons during training, forcing the network to learn strong features so that no one neuron can dominate the decision. This technique very effectively reduces overfitting because it also creates somewhat differently looking "sub-models," each of which learns a different representation. \\
+\textit{Data augmentation}: By artificially increasing the size of the training data using rotation, scaling, or flipping of images, the model mitigates its memorization of respective training data and generalizes better. \\
+These strategies form a powerful toolkit at the disposal of citizens in their endeavor to shore up the generalization capability of deep learning models when it comes to previously unseen data. 
+
+\section{Problem 1}
+\textbf{Google (among others) has produced astonishing results in the
+application of DL models in different domains. Mention two of
+these cases describing shortly the problem solved.} \\
+Over the years, companies like Google have created an impact on many complicated applications of DL models. Two such examples are: \\
+\textit{AlphaFold for Protein Folding}: AlphaFold is a deep learning model developed by Google's DeepMind that has solved the long-standing problems of predicting the 3D structures of proteins. This breakthrough will have a huge twofold impact: on our understanding of diseases and drug discovery. As such, predicting protein structures can catalyze scientific research in medicine and biotechnology. \\
+\textit{Route Optimization with Google Maps}: Google also employed deep learning methods to better its mapping services. By using inverse reinforcement learning, Google improved its route suggestion system, enabling an increase in global route match rates by 16-24%. That will allow Google Maps to offer improved directions to over a billion users. \\
+These particular instances show how deep learning will change a different variety of fields: healthcare is one of them, navigational optimization is another. 
+
+\newpage
+\section{Problem 2}
+\textbf{Lack of data is a big limitation regarding the application of DL
+models to biomedical problems. What techniques can be applied
+to alleviate this problem.} \\
+Deep learning (DL) applications, in conjunction with biomedical problems, face a challenge of data scarcity. However, several techniques may mitigate this problem: \\
+\textit{Data Augmentation}: Among the most widely used methods of limited data issue remediation is augmentation. This can refer to the generation of artificial data by creating variations from an existing dataset using a range of transformations. An example is medical image classification, in which applications involve rotation, flipping, and scaling of images to imitate variations that would reflect different conditions and angles. This process helps models generalize better by introducing higher variability without having to collect more data. \\
+\textit{Generative Models}: Techniques such as generative adversarial networks (GANs) can be employed in the generation of synthetic data. For instance, GANs have been used to synthesize realistic biomedical data, including images describing medical conditions or biological signals, resembling actual data distributions. The generated synthetic data can, in turn, be used to augment the training sets, enhancing model performance in data-scarce scenarios. \\
+\textit{Transfer Learning}: The pre-trained models, mostly trained on large, general datasets, may be fine-tuned on smaller biomedical datasets. In this way, the model learns generalizable features from a wider dataset base, which are then transferred onto a specific biomedical task. Transfer learning can significantly reduce the dependence on large labeled datasets in specialized domains. \\
+\textit{Semi-supervised Learning}: In cases where labeled data is limited, semi-supervised learning can be used to take advantage of the abundance of unlabeled data. These models learn using both labeled and unlabeled data to improve their performance given the scarcity of labeled data. \\
+These techniques can work in conjunction to overcome the limitations posed by data scarcity and enable the use of deep learning in the biomedical field. 
+
+\section{Used sources}
+\begin{itemize}
+    \item \url{https://machinelearningmastery.com/train-test-split-for-evaluating-machine-learning-algorithms/}
+    \item \url{https://www.mygreatlearning.com/blog/cross-validation/}
+    \item \url{https://www.ibm.com/cloud/learn/neural-networks}
+    \item \url{https://www.expert.ai/blog/deep-learning/}
+    \item \url{https://www.freecodecamp.org/news/handling-overfitting-in-deep-learning-models/}
+    \item \url{https://deepmind.google/discover/blog/2023-a-year-of-groundbreaking-advances-in-ai-and-computing/}
+    \item \url{https://en.wikipedia.org/}
+\end{itemize}
