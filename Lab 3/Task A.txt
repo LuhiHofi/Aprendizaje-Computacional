@@ -1,0 +1,26 @@
+Lukáš Hofman & Tomasz Janeczko
+
+Paper title: COVID-19 mortality prediction using ensemble learning and grey wolf optimization
+
+Link to the paper website: https://peerj.com/articles/cs-1209/
+
+Link to the paper pdf version: https://pmc.ncbi.nlm.nih.gov/articles/PMC10280255/
+
+Link to the code: https://zenodo.org/records/7472400
+
+Link to the dataset: https://figshare.com/articles/dataset/covid_19_xlsx/21739745/1?file=38570948
+
+Link to the paper in Scholar Google website: https://peerj.com/articles/cs-1209/
+
+Journal name: PeerJ Computer Science
+
+Journal ISSN: 2376-5992
+
+JCR Edition: Science Citation Index Expanded (SCIE)
+
+JCR Rank by Journal Impact Factor in year 2023 (Category, JIF Rank, and JIF Quartile):
+COMPUTER SCIENCE, THEORY & METHODS, 31/144, Q1
+COMPUTER SCIENCE, INFORMATION SYSTEMS, 83/250, Q2
+COMPUTER SCIENCE, ARTIFICIAL INTELLIGENCE, 75/197, Q2
+
+Link to the journal JCR information website: https://jcr.clarivate.com/jcr-jp/journal-profile?journal=PEERJ%20COMPUT%20SCI&year=2023&fromPage=%2Fjcr%2Fsearch-results
