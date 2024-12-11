@@ -1,0 +1,130 @@
+\section{Introduction to problem}
+\subsection{Yeast}
+Yeast cells have the ability to undergo sporulation, transitioning into a specialized cell type known as a spore. This biological process is pivotal for understanding gene regulation mechanisms. By examining gene activation and deactivation patterns during sporulation, insights into gene functions can be obtained. \\
+In this study, K-means clustering is used to examine gene expression patterns during yeast sporulation. The findings are then compared to previous researches from A1 and A2 documents to evaluate the accuracy of the clustering and its biological relevance.
+
+\subsection{Possible solutions}
+\begin{itemize}
+    \item \textbf{K-means Clustering}: This is a partition-based algorithm, which is probably the most popular one. K-means aims at minimizing within-cluster variance by iterative assignments of data points to centroids. It is efficient for large datasets, but also requires pre-specification of the number of clusters.
+    \item \textbf{Hierarchical Clustering}: It produces nested clusters either by successively combining (agglomerative) or dividing the data (divisive).
+    \item \textbf{Self-Organizing Maps (SOMs)}: That is a neural network-based unsupervised learning approach representing multi-dimensional data within a two-dimensional grid.
+\end{itemize}
+
+\subsection{Dataset}
+The raw dataset consists of 474 genes with expression values recorded over time intervals $t_0, t_{0.5}, t_2, t_5, t_7, t_9, t_{11.5}$. This dataset found in the provided file \texttt{sporulation-filtered.txt} captures dynamic gene activity during sporulation.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Raw_dataset.png}
+\caption{Raw dataset}
+\label{fig:raw_dataset}
+\end{figure}
+
+\section{Description of the methods}
+\subsection{Dataset preprocessing}
+The following preprocessing steps were performed to normalize our dataset:
+\begin{itemize}
+    \item The 'Genes' column was removed
+    \item Values were converted from string format to float
+    \item Quantile normalization was applied to ensure uniform distribution of expression values
+    \item Additional dataset $X_\text{without\_time\_step}$ was created by removing specific time steps ($t_i$ for $i \in \{0, 0.5, 2, 5, 7, 9, 11.5\}$) for sensitivity analysis
+\end{itemize}
+\begin{figure}[H]
+\centering
+\includegraphics{Filtered_dataset.png}
+\caption{Filtered dataset}
+\label{fig:filtered_dataset}
+\end{figure}
+
+\subsection{Basic idea of K-mean algorithm}
+The K-means algorithm has two main steps: \\
+1. \textbf{Initialization}: The algorithm places each item into one of k groups \\
+2. \textbf{Iteration}: The algorithm measures the distance between each item and each group, then moves the item to the closest group \\
+Of course we need to adapt this algorithm to our  case, where 'groups' correspond to 'clusters', and 'items' correspond to 'genes'.
+
+\subsection{Silhouette Index Calculation}
+The Silhouette Index is a metric to evaluate clustering quality. It ranges from -1 to 1. Values close to 1 indicate well-clustered data points, values close to 0 suggest points on cluster boundaries, and values close to -1 indicate potential misclustering. It was calculated using the formula:
+\[
+S(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
+\]
+where \(a(i)\) is the average distance between a point and others within the same cluster, and \(b(i)\) is the average distance between a point and points in the nearest cluster.
+
+\section{Relevant results}
+\subsection{K-means Clustering}
+\begin{figure}[H]
+\centering
+\includegraphics{K-Means.png}
+\caption{K-Means clusters}
+\label{fig:k-means}
+\end{figure}
+The K-Means clustering algorithm has identified 6 distinct groups within the data. The clusters are well-separated, but still some overlap exists. The centroids are well-placed. Further exploration with different parameter settings and initialization methods could potentially improve the clustering results.
+
+\subsection{Silhouette Index Calculation}
+\begin{figure}[H]
+\centering
+\includegraphics{Silhoutte.png}
+\caption{Silhoutte scores}
+\label{fig:silhoutte_scores}
+\end{figure}
+Removing individual time steps generally led to a slight decrease in the silhouette score, indicating that while certain time steps might contain redundant information, they also contribute to the overall clustering structure.  \\
+The highest silhouette score was achieved with 2 clusters, thus suggesting that a simpler clustering solution might be more appropriate for this dataset. As the number of clusters increased, the silhouette score generally decreased, which indicates a potential overfitting of the data. \\
+While removing specific time steps or increasing the number of clusters did not significantly improve the clustering results, the optimal configuration seems to be a simple model with fewer clusters. 
+
+\section{Comparison with published results}
+\subsection{Average proportion of non-overlap measure}
+\begin{figure}[H]
+\centering
+\includegraphics{Eq1.png}
+\label{fig:equation1}
+\end{figure}
+As written in \textit{Comparisons and validation of statistical clustering techniques for microarray gene expression data}: 'This measure computes the (average) proportion of genes that are not put in the same cluster by the clustering method under consideration on the basis of the full data and the data obtained by deleting the expression levels at one time point at a time.'\\
+\textbf{RECEIVED RESULT: 0.2198740163236565} \\ 
+The calculated value closely matches published results, affirming the algorithm's consistency in identifying stable clusters when reducing the dataset.
+
+\subsection{Average distance between means measure}
+\begin{figure}[H]
+\centering
+\includegraphics{Eq2.png}
+\label{fig:equation2}
+\end{figure}
+As written in \textit{Comparisons and validation of statistical clustering techniques for microarray gene expression data}: 'This measure computes the (average) distance between the mean expression ratios (log transformed) of all genes that are put in the same cluster by the clustering method under consideration on the basis of the full data and the data obtained by deleting the expression levels at one time point at a time.' \\
+\textbf{RECEIVED RESULT: 2.372057346679048} \\
+The result we got is similar to what other researchers have found. This shows that the K-means algorithm is good at keeping the average distance between gene expression profiles the same across different experimental conditions.
+
+\subsection{Average distance measure}
+\begin{figure}[H]
+\centering
+\includegraphics{Eq3.png}
+\label{fig:equation3}
+\end{figure}
+As written in \textit{Comparisons and validation of statistical clustering techniques for microarray gene expression data}: 'This measure computes the (average) proportion of genes that are not put in the same cluster by the clustering method under consideration on the basis of the full data and the data obtained by deleting the expression levels at one time point at a time.' \\
+\textbf{RECEIVED RESULT: 0.04429019394535473} \\
+The significantly lower value (around 12 times smaller) suggests either differences in datasets or preprocessing methods. We need to look more closely at why this difference exists.
+
+\section{Analysis of the clustering performance of k-Means}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{Our_results.png}
+\caption{Our results after normalization}
+\label{fig:our_results}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{Published_results.png}
+\caption{Published results}
+\label{fig:published_results}
+\end{figure}
+Comparison between the two graphs shows a strong alignment in general clustering patterns. However Figure 5 shows more clusters with diverse profiles, while Figure 6 shows fewer clusters with similar trends. In conclusion, some clusters differ in size and composition, likely due to preprocessing steps or parameter variations in the K-means implementation.
+
+\section{Conclusions}
+\subsection{Similarity in clusters} 
+Genes in the same cluster often show similar patterns of expression over time, which suggests they might be regulated together or play roles in related biological processes.
+
+\subsection{Differences among clusters} 
+The different patterns seen in various clusters show that gene expression is diverse within the dataset. This indicates that the clustering method has successfully grouped genes with different functions.
+
+\subsection{Algorithm Robustness} 
+Despite limitations, the K-means algorithm demonstrated robustness across reduced datasets, maintaining biologically meaningful clusters.
+    
+\subsection{Future Improvements} 
+Incorporating hybrid methods, such as hierarchical clustering with K-means, could address overlapping clusters and improve accuracy.
