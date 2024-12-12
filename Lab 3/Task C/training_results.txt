@@ -1,0 +1,24 @@
+training_rf.py:
+CV-mean: 0.8949, CV-sd: 0.0169
+CV: 0.8793
+Tuning time: 147.5083713531494s
+
+training_svm.py:
+CV-mean: 0.8737, CV-sd: 0.0178
+CV: 0.8748
+Tuning time: 20.4879252910614s
+
+training_ert.py:
+CV-mean: 0.8934, CV-sd: 0.0107
+CV: 0.8767
+Tuning time: 65.55866813659668s
+
+training_gb.py
+CV-mean: 0.9007, CV-sd: 0.0157
+CV: 0.9057
+Tuning time: 196.96188831329346s
+
+training_knn.py:
+CV-mean: 0.8057, CV-sd: 0.0121
+CV: 0.8632
+Tuning time: 11.715423345565796s
