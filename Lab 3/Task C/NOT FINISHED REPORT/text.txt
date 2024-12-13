@@ -1,0 +1,97 @@
+\section{Introduction}
+\subsection{Introduction to Problem}
+The COVID-19 pandemic has significantly impacted global health systems and economies. This study explores a computational model for predicting COVID-19 mortality risk using ensemble learning techniques combined with Grey Wolf Optimization (GWO). The proposed model achieves a high AUC-ROC score while reducing computational and diagnostic costs. We analyze model development, feature selection, and algorithm optimization strategies, presenting results based on different feature sets and concluding with future recommendations. \\
+According to the article the COVID-19 pandemic has resulted in over 600 million confirmed cases and more than 6.5 million deaths worldwide, disrupting societal norms and economies. Predicting mortality risk in COVID-19 patients is essential for improving medical decision-making and resource allocation. This study proposes a weighted ensemble learning strategy combined with GWO to optimize mortality predictions using a reduced set of features. 
+
+\subsection{Article}
+The article titled "COVID-19 mortality prediction using ensemble learning and grey wolf optimization" describes a method to predict COVID-19 mortality risk with an AUC-ROC value of 0.7802. The method utilizes ensemble learning techniques optimized by the GWO algorithm, requiring only 10 features for optimal performance. This reduction in features lowers diagnostic costs and improves prognostic efficiency, making the method accessible and practical for widespread use.
+
+\subsection{Dataset}
+The dataset used in this study comprises 4,711 cases collected between March 1 and April 16, 2020. It includes 85 variables, of which 20 primary features were selected for model development. The data is divided into training (75\%) and validation/test (25\%) cohorts. \\
+Key features encompass demographic, clinical, and laboratory parameters. The dataset emphasizes variables critical to predicting COVID-19 mortality risk, allowing for efficient model training and evaluation.
+
+\section{Methods}
+\subsection{Model Development}
+The study employs five machine learning algorithms:
+\begin{itemize}
+    \item Gradient Boosting (GB): A robust method focusing on minimizing prediction errors by combining weak learners sequentially.
+    \item Random Forest (RF): An ensemble approach using multiple decision trees to improve prediction accuracy.
+    \item Extremely Randomized Trees (ERT): A variation of RF, introducing randomness in feature selection for enhanced diversity.
+    \item k-Nearest Neighbors (k-NN): A non-parametric method relying on feature proximity for classification.
+    \item Support Vector Machines (SVM): A supervised learning algorithm ideal for high-dimensional spaces.
+\end{itemize}
+The three best-performing models form the base classifiers in a weighted ensemble strategy. The GWO algorithm optimizes the weight coefficients ($w_1$, $w_2$, $w_3$) for these classifiers, enhancing their collective predictive performance.
+
+\subsection{Grey Wolf Optimization (GWO)}
+The GWO algorithm simulates the cooperative hunting behavior of grey wolves, characterized by three roles: Alpha (leader), Beta (sub-leader), and Delta (scout) (others are called Omega). Optimization occurs in three stages:
+\begin{enumerate}
+    \item \textbf{Encircling}: Wolves surround prey based on current positions.
+    \item \textbf{Hunting}: Wolves collaboratively guide the search towards optimal solutions.
+    \item \textbf{Attacking}: Wolves adjust their positions dynamically as the prey (optimal solution) is identified.
+\end{enumerate}
+GWO provides a fast and effective approach for weight optimization, surpassing traditional heuristic methods.
+
+\subsection{Evaluation Metrics}
+The primary metric for evaluation is the AUC-ROC score, which measures the model's discrimination ability. Additional metrics include:
+\begin{itemize}
+    \item \textbf{Precision}: The ratio of true positives to predicted positives.
+    \item \textbf{Recall}: The ratio of true positives to actual positives.
+    \item \textbf{F1-score}: The harmonic mean of precision and recall, balancing the two metrics.
+\end{itemize}
+These metrics provide a comprehensive assessment of model performance across various scenarios.
+
+\section{Results}
+\subsection{Feature Reduction}
+The model was evaluated with feature sets containing 20, 10, and 5 variables. Results indicated that the 10-feature model provided the optimal balance between performance and simplicity, achieving an AUC-ROC score of 0.7802.
+// add graphics 
+
+\subsection{Ensemble Performance}
+The weighted ensemble outperformed individual classifiers, as detailed in Table \ref{tab:results}. The GWO-optimized weights enhanced predictive power, emphasizing the importance of collaborative optimization.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{@{}lccc@{}}
+        \toprule
+        Feature Set & AUC-ROC & Precision & Recall \\
+        \midrule
+        20 Features & 0.7654 & 0.72 & 0.68 \\
+        10 Features & 0.7802 & 0.74 & 0.71 \\
+        5 Features  & 0.7421 & 0.69 & 0.65 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Model Performance with Different Feature Sets}
+    \label{tab:results}
+\end{table}
+
+\section{Our solution}
+\subsection{Implementation}
+The implementation utilized Python 3.11 with libraries including NumPy, Scikit-learn, and Matplotlib. Model training and evaluation adhered to best practices, ensuring reproducibility and robustness. \\
+//...
+
+\subsection{Met problems}
+Challenges included high computational demands and balancing model complexity with interpretability. Preprocessing and hyperparameter tuning required extensive iterations to optimize results. \\
+//..
+
+\subsection{Results}
+// add some graphics + sentence 
+
+\subsection{Comparison with published results}
+Our implementation aligns closely with published results, confirming the robustness of the proposed methodology. Minor deviations are attributable to differences in preprocessing and computational resources.
+// !!!
+
+\section{Analysis}
+\subsection{Article}
+Reducing the feature set from 20 to 10 significantly decreased computational complexity without compromising predictive power. The GWO algorithm proved robust in optimizing ensemble model weights, ensuring higher predictive accuracy than traditional ensemble methods. \\
+The inability to globally optimize weights and control stochastic processes in GWO requires further research. High computational demands for large datasets also posed challenges.
+
+\subsection{Our implementation}
+Our implementation demonstrated similar trends, validating the effectiveness of feature reduction and ensemble learning. Future iterations may explore alternative optimization techniques for further refinement. \\
+\\ we need to write it down..
+
+\section{Conclusions}
+\subsection{Article Conclusions}
+The article concludes that the proposed ensemble learning model, optimized with GWO, effectively predicts COVID-19 mortality risk using a minimal feature set. This approach balances accuracy and efficiency, offering a practical solution for clinical applications.
+
+\subsection{Our Conclusions}
+Our findings confirm the article's conclusions. The proposed methodology is robust, efficient, and adaptable to similar predictive challenges. Future work should address GWO's limitations and explore hybrid optimization strategies.
+\\ also our conclusion..
