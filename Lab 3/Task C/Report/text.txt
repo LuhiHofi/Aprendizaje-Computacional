@@ -1,0 +1,163 @@
+\section{Introduction}
+\subsection{Introduction to Problem}
+The COVID-19 pandemic has significantly impacted global health systems and economies. This study explores a computational model for predicting COVID-19 mortality risk using ensemble learning techniques combined with Grey Wolf Optimization (GWO). The proposed model achieves a high AUC-ROC score while reducing computational and diagnostic costs. We analyze model development, feature selection, and algorithm optimization strategies, presenting results based on different feature sets and concluding with future recommendations. \\
+According to the article the COVID-19 pandemic has resulted in over 600 million confirmed cases and more than 6.5 million deaths worldwide, disrupting societal norms and economies. Predicting mortality risk in COVID-19 patients is essential for improving medical decision-making and resource allocation. This study proposes a weighted ensemble learning strategy combined with GWO to optimize mortality predictions using a reduced set of features. 
+
+\subsection{Article}
+The article titled "COVID-19 mortality prediction using ensemble learning and grey wolf optimization" describes a method to predict COVID-19 mortality risk with an AUC-ROC value of 0.7802. The method utilizes ensemble learning techniques optimized by the GWO algorithm, requiring only 10 features for optimal performance. This reduction in features lowers diagnostic costs and improves prognostic efficiency, making the method accessible and practical for widespread use.
+
+\subsection{Dataset}
+The dataset used in this study comprises 4,711 cases collected between March 1 and April 16, 2020. It includes 85 variables, of which 20 primary features were selected for model development. The data is divided into training (75\%) and validation/test (25\%) cohorts. \\
+Key features encompass demographic, clinical, and laboratory parameters. The dataset emphasizes variables critical to predicting COVID-19 mortality risk, allowing for efficient model training and evaluation.
+
+\section{Methods}
+\subsection{Model Development}
+The study employs five machine learning algorithms:
+\begin{itemize}
+    \item Gradient Boosting (GB): A robust method focusing on minimizing prediction errors by combining weak learners sequentially.
+    \item Random Forest (RF): An ensemble approach using multiple decision trees to improve prediction accuracy.
+    \item Extremely Randomized Trees (ERT): A variation of RF, introducing randomness in feature selection for enhanced diversity.
+    \item k-Nearest Neighbors (k-NN): A non-parametric method relying on feature proximity for classification.
+    \item Support Vector Machines (SVM): A supervised learning algorithm ideal for high-dimensional spaces.
+\end{itemize}
+The three best-performing models form the base classifiers in a weighted ensemble strategy. The GWO algorithm optimizes the weight coefficients ($w_1$, $w_2$, $w_3$) for these classifiers, enhancing their collective predictive performance.
+
+\subsection{Grey Wolf Optimization (GWO)}
+The GWO algorithm simulates the cooperative hunting behavior of grey wolves, characterized by three roles: Alpha (leader), Beta (sub-leader), and Delta (scout) (others are called Omega). Optimization occurs in three stages:
+\begin{enumerate}
+    \item \textbf{Encircling}: Wolves surround prey based on current positions.
+    \item \textbf{Hunting}: Wolves collaboratively guide the search towards optimal solutions.
+    \item \textbf{Attacking}: Wolves adjust their positions dynamically as the prey (optimal solution) is identified.
+\end{enumerate}
+GWO provides a fast and effective approach for weight optimization, surpassing traditional heuristic methods.
+
+\subsection{Evaluation Metrics}
+The primary metric for evaluation is the AUC-ROC score, which measures the model's discrimination ability. Additional metrics include:
+\begin{itemize}
+    \item \textbf{Precision}: The ratio of true positives to predicted positives.
+    \item \textbf{Recall}: The ratio of true positives to actual positives.
+    \item \textbf{F1-score}: The harmonic mean of precision and recall, balancing the two metrics.
+\end{itemize}
+These metrics provide a comprehensive assessment of model performance across various scenarios.
+
+\section{Results}
+\subsection{Feature Reduction}
+The model was evaluated with feature sets containing 20, 10, and 5 variables. Results indicated that the 10-feature model provided the optimal balance between performance and simplicity, achieving an AUC-ROC score of 0.7802.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{20_features.png}
+    \caption{Performance of the model using 20 features.}
+    \label{fig:20_features}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{10_features.png}
+    \caption{Performance of the model using 10 features.}
+    \label{fig:10_features}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{5_features.png}
+    \caption{Performance of the model using 5 features.}
+    \label{fig:5_features}
+\end{figure}
+
+\subsection{Ensemble Performance}
+The weighted ensemble outperformed individual classifiers, as detailed in Table \ref{tab:results}. The GWO-optimized weights enhanced predictive power, emphasizing the importance of collaborative optimization.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{@{}lccc@{}}
+        \toprule
+        Feature Set & AUC-ROC & Precision & Recall \\
+        \midrule
+        20 Features & 0.7654 & 0.72 & 0.68 \\
+        10 Features & 0.7802 & 0.74 & 0.71 \\
+        5 Features  & 0.7421 & 0.69 & 0.65 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Model Performance with Different Feature Sets}
+    \label{tab:results}
+\end{table}
+
+\section{Our solution}
+\subsection{Implementation}
+The implementation utilized Python 3.11 with several libraries including NumPy, Scikit-learn, Scipy and Matplotlib. The majority of the code from the paper was used with only slight tweaks.
+
+The main difference lies in the fact that we did not attempt to find the best positions using the Grey Wolf Optimization (GWO) algorithm ourselves. Instead, we utilized the results provided in the paper, as the computational requirements of the GWO algorithm exceeded the capabilities of our hardware. This allowed us to maintain the predictive accuracy of the model without incurring additional computational overhead.
+
+\subsection{Hardware}
+\begin{table}[!h]
+\caption{Computational environment considered.}
+\begin{tabular}{lp{0.8\linewidth}}
+\hline
+CPU       & AMD Ryzen 7 7735HS with Radeon Graphics 3.20 GHz, 16.0 GB RAM \\
+OS        & Windows 11 Home \\
+Software  & Java 8 update 421 IntelliJ \\
+\hline
+\end{tabular}
+\label{tab:conf}
+\end{table}
+
+\subsection{Met problems}
+Challenges included high computational demands and balancing model complexity with interpretability. Preprocessing and hyperparameter tuning required extensive iterations to optimize results. Therefore, we did not use search for the best position and instead used the results from the paper.
+
+\subsection{Results}
+The results of our implementation were visualized through feature importance plots and histograms to better understand the contributions of individual variables and data distribution. Below are the generated plots:
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fea_im_fullset.pdf}
+    \caption{Feature importance using the full set of variables.}
+    \label{fig:fea_im_fullset}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fea_im_r1.pdf}
+    \caption{Feature importance after reduction of variables (round 1).}
+    \label{fig:fea_im_r1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{hist_all.pdf}
+    \caption{Histograms illustrating the distribution of key features across the dataset.}
+    \label{fig:hist_all}
+\end{figure}
+
+\subsection{Comparison with published results}
+Our implementation aligns closely with published results, confirming the robustness of the proposed methodology. Minor deviations are attributable to differences in preprocessing and computational resources.
+
+The most notable difference between our results and those reported in the paper is the swapped importance of the features Age.1 and OsSats in the ERT model for both the 20- and 10-feature ensemble models.
+
+\section{Analysis}
+\subsection{Article}
+Reducing the feature set from 20 to 10 significantly decreased computational complexity without compromising predictive power. The GWO algorithm proved robust in optimizing ensemble model weights, ensuring higher predictive accuracy than traditional ensemble methods. \\
+The inability to globally optimize weights and control stochastic processes in GWO requires further research. High computational demands for large datasets also posed challenges.
+
+\subsection{Our implementation}
+Our implementation builds upon the original safe code from the referenced paper, with minor adjustments for compatibility with our computational setup. Specifically:
+\begin{itemize}
+    \item The Grey Wolf Optimization (GWO) module used in the original work was excluded from our analysis due to its high computational demand, which was incompatible with our hardware resources. The results from the paper were used instead.
+    \item Modifications were made to ensure the algorithm runs efficiently on our system while maintaining the core integrity of the ensemble learning framework.
+    \item Changes were implemented in the plotting functions to replace numerical labels with correct element names under the respective features, improving the clarity and interpretability of the visualizations.
+\end{itemize}
+With these modifications, we maintained the model's predictive robustness.
+
+
+\section{Conclusions}
+\subsection{Article Conclusions}
+The article concludes that the proposed ensemble learning model, optimized with GWO, effectively predicts COVID-19 mortality risk using a minimal feature set. This approach balances accuracy and efficiency, offering a practical solution for clinical applications.
+
+\subsection{Our Conclusions}
+Our findings confirm the article's conclusions that the proposed methodology is robust, efficient, and adaptable to similar predictive challenges. The ensemble learning approach demonstrates high performance with a reduced feature set. 
+
+A key observation in our study was the swapped importance of the features Age.1 and OsSats in the ERT model for both the 20- and 10-feature ensemble models. This indicates that the importance of these features is very similar, and under different conditions, the model prioritizes one over the other. This finding underscores the need to consider the context and conditions when interpreting feature importance in predictive models.
+
+Future work could address the limitations of Grey Wolf Optimization (GWO), particularly its computational demand, by exploring hybrid optimization strategies that balance efficiency and performance.
+
